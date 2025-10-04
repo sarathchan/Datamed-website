@@ -478,14 +478,14 @@ export default function App() {
 
         {/* Mission & Vision Cards */}
         <StaggeredContainer 
-          className="grid md:grid-cols-2 gap-8"
+          className="grid md:grid-cols-2 gap-8 h-80"
           staggerDelay={0.2}
           delay={0.6}
         >
           <HoverScale scale={1.02}>
             <motion.div 
               whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(59, 130, 246, 0.1)" }}
-              className="bg-blue-50 shadow rounded-lg p-6 smooth-transition hover:shadow-xl gpu-accelerated"
+              className="bg-blue-50 shadow rounded-lg p-6 smooth-transition hover:shadow-xl gpu-accelerated h-80 flex flex-col"
             >
               <motion.h3 
                 initial={{ opacity: 0, x: -20 }}
@@ -499,7 +499,7 @@ export default function App() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.0 }}
-                className="text-gray-700 leading-relaxed"
+                className="text-gray-700 leading-relaxed flex-grow"
               >
                 Our mission is to streamline healthcare revenue processes by delivering reliable, accurate, and efficient RCM and e-claim solutions that reduce denials, accelerate payments, and enhance financial performance for healthcare providers.
               </motion.p>
@@ -509,7 +509,7 @@ export default function App() {
           <HoverScale scale={1.02}>
             <motion.div 
               whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(34, 197, 94, 0.1)" }}
-              className="bg-green-50 shadow rounded-lg p-6 smooth-transition hover:shadow-xl gpu-accelerated"
+              className="bg-green-50 shadow rounded-lg p-6 smooth-transition hover:shadow-xl gpu-accelerated h-80 flex flex-col"
             >
               <motion.h3 
                 initial={{ opacity: 0, x: -20 }}
@@ -523,7 +523,7 @@ export default function App() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.2 }}
-                className="text-gray-700 leading-relaxed"
+                className="text-gray-700 leading-relaxed flex-grow"
               >
                 Our vision is to become a leading RCM solutions provider in the Middle East and beyond, recognized for innovation, trust, and excellence in healthcare financial management — helping healthcare institutions achieve sustainable growth while prioritizing patient well-being.
               </motion.p>
