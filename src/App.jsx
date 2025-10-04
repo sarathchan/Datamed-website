@@ -97,7 +97,7 @@ function AppContent() {
           <HoverScale scale={1.1}>
             <div className="flex items-center space-x-2 sm:space-x-4">
           <img src={Logo} alt="Logo" className="h-14 w-14 object-contain" />
-          <span className="text-lg sm:text-xl font-bold">DataMed</span>
+          {/* <span className="text-lg sm:text-xl font-bold">DataMed</span> */}
         </div>
           </HoverScale>
           {/* <span className={`text-lg sm:text-xl font-bold ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>
