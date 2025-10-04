@@ -115,7 +115,56 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground transition-colors duration-300;
+  }
+}
+
+/* Dark mode enhancements */
+@layer utilities {
+  .dark {
+    /* Custom dark mode colors for DataMed */
+    --color-primary-dark: #1f2937;
+    --color-secondary-dark: #374151;
+    --color-accent-dark: #4b5563;
+    --color-text-dark: #f9fafb;
+    --color-text-muted-dark: #d1d5db;
+    --color-border-dark: #374151;
+    --color-card-dark: #1f2937;
+    --color-success-dark: #059669;
+    --color-error-dark: #dc2626;
+  }
+
+  /* Smooth theme transitions */
+  * {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Custom scrollbar for dark mode */
+  .dark ::-webkit-scrollbar-track {
+    background: #1f2937;
+  }
+  
+  .dark ::-webkit-scrollbar-thumb {
+    background: #4b5563;
+  }
+  
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+  }
+
+  /* Enhanced navbar styling */
+  .navbar-glass {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  /* Theme toggle glow effect */
+  .theme-toggle-glow {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+
+  .dark .theme-toggle-glow {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
   }
 }
 

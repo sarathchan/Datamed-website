@@ -9,10 +9,13 @@ import { BsFillBarChartFill } from "react-icons/bs";
 import { FaUser, FaFileAlt, FaClipboardList, FaSearch, FaArrowRight  } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { FadeIn, StaggeredContainer, HoverScale, ParallaxScroll } from "./components/animations";
+import { ThemeProvider, useTheme } from "./contexts/ThemeContext";
+import ThemeToggle from "./components/ThemeToggle";
 
-export default function App() {
+function AppContent() {
   const [activeLink, setActiveLink] = useState("");
   const navigate = useNavigate();
+  const { theme } = useTheme();
 
   const navLinks = [
     { name: "About", path: "#about" },
@@ -30,49 +33,83 @@ export default function App() {
   };
 
   return (
-    <div className="font-sans text-gray-800">
+    <div className={`font-sans transition-colors duration-300 ${
+      theme === 'dark' 
+        ? 'bg-gray-900 text-gray-100' 
+        : 'bg-white text-gray-800'
+    }`}>
       {/* Navbar */}
       <motion.nav 
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="w-full flex items-center justify-between px-12 py-5 shadow-sm bg-white border-b border-gray-200 fixed top-0 left-0 z-50 gpu-accelerated"
+        className={`w-full flex items-center justify-between px-6 md:px-12 py-4 shadow-lg fixed top-0 left-0 z-50 gpu-accelerated transition-all duration-300 ${
+          theme === 'dark'
+            ? 'bg-gray-900/95 backdrop-blur-md border-b border-gray-700'
+            : 'bg-white/95 backdrop-blur-md border-b border-gray-200'
+        }`}
       >
         {/* Left: Logo */}
-        <FadeIn direction="left" delay={0.2} className="flex items-center space-x-4 pl-4">
+        <FadeIn direction="left" delay={0.2} className="flex items-center space-x-3">
           <HoverScale scale={1.1}>
-            <img src={Logo} alt="Logo" className="h-14 w-14 object-contain" />
+            <img src={Logo} alt="Logo" className="h-12 w-12 md:h-14 md:w-14 object-contain" />
           </HoverScale>
-          <span className="text-xl font-bold">DataMed</span>
+          <span className="text-lg md:text-xl font-bold text-gray-800 dark:text-white">DataMed</span>
         </FadeIn>
 
-        {/* Right: Nav links */}
-        <StaggeredContainer 
-          className="flex items-center space-x-8 justify-center flex-1"
-          staggerDelay={0.1}
-          delay={0.3}
-        >
-          {navLinks.map((link) => (
-            <HoverScale key={link.name} scale={1.05}>
-              <button
-                onClick={() => handleClick(link)}
-                className={cn(
-                  "text-base font-medium px-3 py-2 rounded smooth-transition hover:text-blue-600 hover:border-b-2 hover:border-blue-500",
-                  activeLink === link.name
-                    ? "text-blue-600 border-b-2 border-blue-500"
-                    : "text-gray-700 border-b-2 border-transparent"
-                )}
-              >
-                {link.name}
-              </button>
-            </HoverScale>
-          ))}
-        </StaggeredContainer>
+        {/* Center: Nav links */}
+        <div className="hidden md:flex items-center space-x-8">
+          <StaggeredContainer 
+            className="flex items-center space-x-8"
+            staggerDelay={0.1}
+            delay={0.3}
+          >
+            {navLinks.map((link) => (
+              <HoverScale key={link.name} scale={1.05}>
+                <button
+                  onClick={() => handleClick(link)}
+                  className={cn(
+                    "text-sm md:text-base font-medium px-3 py-2 rounded-lg smooth-transition hover:text-blue-600 dark:hover:text-blue-400",
+                    activeLink === link.name
+                      ? "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20"
+                      : theme === 'dark' 
+                        ? "text-gray-300 hover:bg-gray-800"
+                        : "text-gray-700 hover:bg-gray-100"
+                  )}
+                >
+                  {link.name}
+                </button>
+              </HoverScale>
+            ))}
+          </StaggeredContainer>
+        </div>
+
+        {/* Right: Theme Toggle and Mobile Menu */}
+        <div className="flex items-center space-x-3">
+          {/* Theme Toggle - Always Visible */}
+          <ThemeToggle />
+          
+          {/* Mobile Menu Button */}
+          <motion.button
+            className={`md:hidden p-2 rounded-lg transition-colors duration-200 ${
+              theme === 'dark' 
+                ? 'text-gray-300 hover:bg-gray-800 hover:text-white' 
+                : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+            }`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label="Open mobile menu"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </motion.button>
+        </div>
       </motion.nav>
 
 {/* Hero / Feature Container */}
 <section
-  className="flex items-center pt-32 pb-19 overflow-hidden"
+  className="flex items-center pt-24 md:pt-28 pb-19 overflow-hidden"
   style={{ backgroundColor: "#178560" }}
 >
   <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
@@ -140,7 +177,9 @@ export default function App() {
 </section>
 
 {/* Features Section */}
-<section className="bg-white py-14">
+<section className={`py-14 transition-colors duration-300 ${
+  theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+}`}>
   <FadeIn direction="up" delay={0.2}>
     <div className="max-w-6xl mx-auto px-6 text-center mb-16">
       <h2 className="text-4xl md:text-5xl font-bold">
@@ -158,7 +197,11 @@ export default function App() {
     <HoverScale scale={1.05}>
       <motion.div 
         whileHover={{ y: -10 }}
-        className="flex flex-col items-center p-6 rounded-xl smooth-transition hover:shadow-lg gpu-accelerated"
+        className={`flex flex-col items-center p-6 rounded-xl smooth-transition hover:shadow-lg gpu-accelerated ${
+          theme === 'dark' 
+            ? 'bg-gray-700 hover:bg-gray-600' 
+            : 'bg-gray-50 hover:bg-gray-100'
+        }`}
       >
         <motion.div
           initial={{ scale: 0 }}
@@ -168,7 +211,9 @@ export default function App() {
           <AiFillCheckCircle className="h-12 w-12 text-green-500 mb-4" />
         </motion.div>
         <h3 className="text-xl font-semibold mb-2">Apply Claims Easily</h3>
-        <p className="text-gray-700">
+        <p className={`${
+          theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+        }`}>
           Submit insurance claims through a clean guided web form.
         </p>
       </motion.div>
@@ -178,7 +223,11 @@ export default function App() {
     <HoverScale scale={1.05}>
       <motion.div 
         whileHover={{ y: -10 }}
-        className="flex flex-col items-center p-6 rounded-xl smooth-transition hover:shadow-lg gpu-accelerated"
+        className={`flex flex-col items-center p-6 rounded-xl smooth-transition hover:shadow-lg gpu-accelerated ${
+          theme === 'dark' 
+            ? 'bg-gray-700 hover:bg-gray-600' 
+            : 'bg-gray-50 hover:bg-gray-100'
+        }`}
       >
         <motion.div
           initial={{ scale: 0 }}
@@ -217,7 +266,9 @@ export default function App() {
 </section>
 
 {/* How Datamed Works Section */}
-<section className="bg-gray-50 py-24">
+<section className={`py-24 transition-colors duration-300 ${
+  theme === 'dark' ? 'bg-gray-800' : 'bg-gray-50'
+}`}>
   <FadeIn direction="up" delay={0.2}>
     <div className="max-w-6xl mx-auto px-6 text-center mb-16">
       <h2 className="text-4xl md:text-5xl font-bold">How Datamed Works</h2>
@@ -226,7 +277,11 @@ export default function App() {
 
   {/* Box container */}
   <FadeIn direction="up" delay={0.4}>
-    <div className="max-w-5xl mx-auto px-6 bg-white shadow-md rounded-xl py-12 flex flex-col md:flex-row items-center justify-between gap-8 relative border border-gray-300 gpu-accelerated">
+    <div className={`max-w-5xl mx-auto px-6 shadow-md rounded-xl py-12 flex flex-col md:flex-row items-center justify-between gap-8 relative border gpu-accelerated transition-colors duration-300 ${
+      theme === 'dark' 
+        ? 'bg-gray-700 border-gray-600' 
+        : 'bg-white border-gray-300'
+    }`}>
       <StaggeredContainer 
         className="contents"
         staggerDelay={0.3}
@@ -591,5 +646,14 @@ export default function App() {
         © 2025 DataMed. All rights reserved.
       </motion.footer>
     </div>
+  );
+}
+
+// Main App component with Theme Provider
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
