@@ -655,7 +655,10 @@ function AppContent() {
           <h2 className="text-2xl sm:text-3xl font-semibold mb-4 sm:mb-6 text-center">Contact Us</h2>
         </FadeIn>
         <FadeIn direction="up" delay={0.4}>
-          <p className="text-center text-sm sm:text-base">Email: support@datamed.com | Phone: +1234567890</p>
+          <div className="text-center text-sm sm:text-base space-y-2">
+            <p>Email: ahila@datamed-uae.com | Phone: 505766911</p>
+            <p>Address: #619/0, Abraj Center, Naif Deira, Dubai, United Arab Emirates</p>
+          </div>
         </FadeIn>
       </section>
 
@@ -669,7 +672,7 @@ function AppContent() {
           theme === 'dark' ? 'bg-gray-900 text-gray-300' : 'bg-gray-800 text-white'
         }`}
       >
-        © 2025 DataMed. All rights reserved.
+        © 2024 DataMed. All rights reserved.
       </motion.footer>
     </div>
   );
