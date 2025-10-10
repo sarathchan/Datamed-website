@@ -1,8 +1,45 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { AiFillCheckCircle, AiFillPlusCircle } from "react-icons/ai";
-import { BsFillBarChartFill } from "react-icons/bs";
-import { FaUser, FaFileAlt, FaClipboardList, FaSearch, FaArrowRight, FaArrowDown, FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
+import { 
+  AiFillCheckCircle, 
+  AiFillPlusCircle, 
+  AiOutlineRocket,
+  AiOutlineBarChart,
+  AiOutlineCloud,
+  AiOutlineSetting,
+  AiOutlineTeam,
+  AiOutlineStar,
+  AiOutlinePhone,
+  AiOutlineMail,
+  AiOutlineEnvironment
+} from "react-icons/ai";
+import { 
+  BsFillBarChartFill, 
+  BsShieldCheck, 
+  BsLightningFill,
+  BsGearFill,
+  BsGraphUp,
+  BsCloudCheck
+} from "react-icons/bs";
+import { 
+  FaUser, 
+  FaFileAlt, 
+  FaClipboardList, 
+  FaSearch, 
+  FaArrowRight, 
+  FaArrowDown, 
+  FaBars, 
+  FaTimes, 
+  FaSun, 
+  FaMoon,
+  FaStethoscope,
+  FaChartLine,
+  FaCogs,
+  FaRocket,
+  FaHandshake,
+  FaEnvelope,
+  FaMapMarkerAlt
+} from "react-icons/fa";
 import { motion } from "framer-motion";
 import React from "react";
 import Logo from "./assets/datamedlogo.jpeg"; 
@@ -61,8 +98,9 @@ function AppContent() {
 
   const navLinks = [
     { name: "About", path: "#about" },
-    { name: "Features", path: "#features" },
-    { name: "Pricing", path: "#pricing" },
+    { name: "Services", path: "#services" },
+    { name: "Claims Tracker", path: "#claims-tracker" },
+    { name: "Why Choose Us", path: "#why-choose-us" },
     { name: "Contact", path: "#contact" },
   ];
 
@@ -193,7 +231,7 @@ function AppContent() {
         )}
       </motion.nav>
 
-      {/* Hero / Feature Container */}
+      {/* Hero Section */}
       <section
         className="flex items-center pt-24 sm:pt-32 pb-12 sm:pb-16 overflow-hidden"
         style={{ backgroundColor: "#178560" }}
@@ -201,6 +239,16 @@ function AppContent() {
 <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 flex flex-col md:flex-row items-center gap-8 sm:gap-12">
           {/* Left side: Text & Buttons */}
           <FadeIn direction="left" delay={0.2} className="flex-1 text-white flex flex-col justify-center text-center md:text-left">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mb-4"
+            >
+              <span className="text-lg sm:text-xl font-medium text-green-200">
+                Data Med Project Management Services Co.
+              </span>
+            </motion.div>
             <motion.h1 
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -213,9 +261,17 @@ function AppContent() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-base sm:text-lg md:text-xl mb-6"
+              className="text-base sm:text-lg md:text-xl mb-6 text-green-100"
             >
-              Datamed makes claim application seamless with real-time tracking and performance insights.
+              Pioneering Intelligent and Ethical Transformation by Redefining Possibilities with Data & AI
+            </motion.p>
+            <motion.p 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+              className="text-sm sm:text-base md:text-lg mb-8 text-green-50"
+            >
+              Empowering healthcare providers across the Middle East with precision, efficiency, and compliance in financial operations through advanced RCM and e-claim solutions.
             </motion.p>
             <motion.div 
               initial={{ opacity: 0, y: 30 }}
@@ -228,7 +284,7 @@ function AppContent() {
                   className="px-6 py-3 rounded-md font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
                   style={{ backgroundColor: "#dd5d5d", color: "white", cursor:"pointer" }}
                 >
-                  Try Demo
+                  Request Free Demo
                 </button>
               </HoverScale>
 
@@ -237,7 +293,7 @@ function AppContent() {
                   className="px-6 py-3 rounded-md font-semibold transition-all duration-200 border-2 hover:bg-white hover:text-green-600"
                   style={{ borderColor: "#fff", color: "#fff", backgroundColor: "transparent", cursor:"pointer" }}
                 >
-                  Watch How It Works
+                  Learn More
                 </button>
               </HoverScale>
             </motion.div>
@@ -254,7 +310,7 @@ function AppContent() {
               <div className="flex-1 flex justify-center">
       <img
         src={image}
-        alt="Demo Illustration"
+                  alt="Data Med RCM Solutions"
         className="w-full h-auto rounded-lg shadow-lg"
       />
     </div>
@@ -263,24 +319,27 @@ function AppContent() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className={`py-12 sm:py-14 transition-colors duration-300 ${
+      {/* Our Specializations Section */}
+      <section id="services" className={`py-12 sm:py-14 transition-colors duration-300 ${
         theme === 'dark' ? 'bg-gray-800' : 'bg-white'
       }`}>
         <FadeIn direction="up" delay={0.2}>
           <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">
-              Everything You Need in One Smart Platform
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              Our Specializations
             </h2>
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300">
+              Comprehensive RCM solutions for healthcare providers across the Middle East
+            </p>
           </div>
         </FadeIn>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 grid sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12 text-center">
-          {/* Feature 1 */}
+          {/* Revenue Cycle Management */}
           <HoverScale scale={1.05}>
             <motion.div 
               whileHover={{ y: -10 }}
-              className={`flex flex-col items-center p-6 rounded-xl transition-all duration-200 hover:shadow-lg ${
+              className={`flex flex-col items-center p-6 rounded-xl transition-all duration-200 hover:shadow-lg h-full ${
                 theme === 'dark' 
                   ? 'bg-gray-700 hover:bg-gray-600' 
                   : 'bg-gray-50 hover:bg-gray-100'
@@ -292,20 +351,20 @@ function AppContent() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
               >
-                <AiFillCheckCircle className="h-12 w-12 text-green-500 mb-4" />
+                <FaChartLine className="h-12 w-12 text-blue-500 mb-4" />
               </motion.div>
-              <h3 className="text-xl font-semibold mb-2">Apply Claims Easily</h3>
-              <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                Submit insurance claims through a clean guided web form.
+              <h3 className="text-xl font-semibold mb-2">Revenue Cycle Management (RCM)</h3>
+              <p className={`flex-grow ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                End-to-end revenue cycle optimization from claim submission to reconciliation.
               </p>
             </motion.div>
           </HoverScale>
 
-          {/* Feature 2 */}
+          {/* E-Claim Reconciliation */}
           <HoverScale scale={1.05}>
             <motion.div 
               whileHover={{ y: -10 }}
-              className={`flex flex-col items-center p-6 rounded-xl transition-all duration-200 hover:shadow-lg ${
+              className={`flex flex-col items-center p-6 rounded-xl transition-all duration-200 hover:shadow-lg h-full ${
                 theme === 'dark' 
                   ? 'bg-gray-700 hover:bg-gray-600' 
                   : 'bg-gray-50 hover:bg-gray-100'
@@ -317,20 +376,20 @@ function AppContent() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
               >
-                <AiFillPlusCircle className="h-12 w-12 text-red-500 mb-4" />
+                <BsShieldCheck className="h-12 w-12 text-green-500 mb-4" />
               </motion.div>
-              <h3 className="text-xl font-semibold mb-2">Track Claim Status in Real Time</h3>
-              <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                Know exactly where your claim stands with smart tracking.
+              <h3 className="text-xl font-semibold mb-2">E-Claim Reconciliation</h3>
+              <p className={`flex-grow ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                Automated reconciliation processes ensuring accuracy and compliance.
               </p>
             </motion.div>
           </HoverScale>
 
-          {/* Feature 3 */}
+          {/* Resubmission Services */}
           <HoverScale scale={1.05}>
             <motion.div 
               whileHover={{ y: -10 }}
-              className={`flex flex-col items-center p-6 rounded-xl transition-all duration-200 hover:shadow-lg ${
+              className={`flex flex-col items-center p-6 rounded-xl transition-all duration-200 hover:shadow-lg h-full ${
                 theme === 'dark' 
                   ? 'bg-gray-700 hover:bg-gray-600' 
                   : 'bg-gray-50 hover:bg-gray-100'
@@ -342,24 +401,166 @@ function AppContent() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.4, type: "spring", stiffness: 200 }}
               >
-                <BsFillBarChartFill className="h-12 w-12 text-green-500 mb-4" />
+                <FaRocket className="h-12 w-12 text-red-500 mb-4" />
               </motion.div>
-              <h3 className="text-xl font-semibold mb-2">Analytics Dashboard</h3>
-              <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
-                Get insights on success rate, rejections, and more.
+              <h3 className="text-xl font-semibold mb-2">Resubmission Services</h3>
+              <p className={`flex-grow ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>
+                Intelligent resubmission with error handling and automated workflows.
               </p>
             </motion.div>
           </HoverScale>
         </div>
       </section>
 
-      {/* How Datamed Works Section */}
-      <section className={`py-12 sm:py-24 transition-colors duration-300 ${
+      {/* Claims Tracker Section */}
+      <section id="claims-tracker" className={`py-12 sm:py-24 transition-colors duration-300 ${
         theme === 'dark' ? 'bg-gray-900' : 'bg-gray-50'
       }`}>
         <FadeIn direction="up" delay={0.2}>
           <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">How Datamed Works</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              Claims Tracker™: Automation Enabled
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300">
+              The "Claims Tracker" application is designed for smarter, faster, and more efficient revenue cycle operations.
+            </p>
+          </div>
+        </FadeIn>
+
+        {/* Claims Tracker Features Grid */}
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12">
+          {/* Seamless Integration */}
+          <HoverScale scale={1.02}>
+            <motion.div 
+              whileHover={{ y: -5 }}
+              className={`p-6 rounded-xl transition-all duration-200 hover:shadow-lg ${
+                theme === 'dark' 
+                  ? 'bg-gray-800 hover:bg-gray-700' 
+                  : 'bg-white hover:bg-gray-50'
+              }`}
+            >
+              <BsCloudCheck className="h-8 w-8 text-blue-500 mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Seamless Integration</h3>
+              <p className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+                Integration with DHPO, Riayati, and Shafafiya platforms.
+              </p>
+            </motion.div>
+          </HoverScale>
+
+          {/* Real-time Data */}
+          <HoverScale scale={1.02}>
+            <motion.div 
+              whileHover={{ y: -5 }}
+              className={`p-6 rounded-xl transition-all duration-200 hover:shadow-lg ${
+                theme === 'dark' 
+                  ? 'bg-gray-800 hover:bg-gray-700' 
+                  : 'bg-white hover:bg-gray-50'
+              }`}
+            >
+              <BsLightningFill className="h-8 w-8 text-yellow-500 mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Real-time Data</h3>
+              <p className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+                Real-time data aggregation and insurance adjudication insights.
+              </p>
+            </motion.div>
+          </HoverScale>
+
+          {/* Centralized Dashboard */}
+          <HoverScale scale={1.02}>
+            <motion.div 
+              whileHover={{ y: -5 }}
+              className={`p-6 rounded-xl transition-all duration-200 hover:shadow-lg ${
+                theme === 'dark' 
+                  ? 'bg-gray-800 hover:bg-gray-700' 
+                  : 'bg-white hover:bg-gray-50'
+              }`}
+            >
+              <BsFillBarChartFill className="h-8 w-8 text-green-500 mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Centralized Dashboard</h3>
+              <p className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+                Centralized dashboard for claims, remittances, denials, and appeals.
+              </p>
+            </motion.div>
+          </HoverScale>
+
+          {/* RCM Automation */}
+          <HoverScale scale={1.02}>
+            <motion.div 
+              whileHover={{ y: -5 }}
+              className={`p-6 rounded-xl transition-all duration-200 hover:shadow-lg ${
+                theme === 'dark' 
+                  ? 'bg-gray-800 hover:bg-gray-700' 
+                  : 'bg-white hover:bg-gray-50'
+              }`}
+            >
+              <FaCogs className="h-8 w-8 text-purple-500 mb-4" />
+              <h3 className="text-lg font-semibold mb-2">End-to-End RCM Automation</h3>
+              <p className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+                Full visibility and control of your RCM workflow with automation.
+              </p>
+            </motion.div>
+          </HoverScale>
+
+          {/* KPI Configuration */}
+          <HoverScale scale={1.02}>
+            <motion.div 
+              whileHover={{ y: -5 }}
+              className={`p-6 rounded-xl transition-all duration-200 hover:shadow-lg ${
+                theme === 'dark' 
+                  ? 'bg-gray-800 hover:bg-gray-700' 
+                  : 'bg-white hover:bg-gray-50'
+              }`}
+            >
+              <BsGearFill className="h-8 w-8 text-indigo-500 mb-4" />
+              <h3 className="text-lg font-semibold mb-2">KPI-Based Configuration</h3>
+              <p className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+                Customizable KPI-based configuration for automatic transaction management.
+              </p>
+            </motion.div>
+          </HoverScale>
+
+          {/* Resubmission Intelligence */}
+          <HoverScale scale={1.02}>
+            <motion.div 
+              whileHover={{ y: -5 }}
+              className={`p-6 rounded-xl transition-all duration-200 hover:shadow-lg ${
+                theme === 'dark' 
+                  ? 'bg-gray-800 hover:bg-gray-700' 
+                  : 'bg-white hover:bg-gray-50'
+              }`}
+            >
+              <FaRocket className="h-8 w-8 text-red-500 mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Resubmission Intelligence</h3>
+              <p className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+                Intelligent automation and error-handling tools for resubmission.
+              </p>
+            </motion.div>
+          </HoverScale>
+        </div>
+
+        {/* Comprehensive Reporting */}
+        <FadeIn direction="up" delay={0.4}>
+          <div className={`max-w-4xl mx-auto px-4 sm:px-6 text-center p-8 rounded-xl ${
+            theme === 'dark' 
+              ? 'bg-gray-800' 
+              : 'bg-white'
+          }`}>
+            <BsGraphUp className="h-12 w-12 text-blue-500 mx-auto mb-4" />
+            <h3 className="text-2xl font-bold mb-4">Comprehensive Reporting & Analytics</h3>
+            <p className={`text-lg ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+              Real-time dashboards for monitoring claim performance, tracking rejections, analyzing payment trends, and making data-driven decisions.
+            </p>
+          </div>
+        </FadeIn>
+      </section>
+
+      {/* How Data Med Works Section */}
+      <section className={`py-12 sm:py-24 transition-colors duration-300 ${
+        theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+      }`}>
+        <FadeIn direction="up" delay={0.2}>
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold">How Data Med Works</h2>
           </div>
         </FadeIn>
 
@@ -542,7 +743,7 @@ function AppContent() {
       {/* About Us Section */}
       <section id="about" className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-24">
         <FadeIn direction="up" delay={0.2}>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12 text-center">About Us</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-12 text-center">About Data Med</h2>
         </FadeIn>
 
         <FadeIn direction="up" delay={0.4}>
@@ -558,12 +759,12 @@ function AppContent() {
               <p className={`text-base sm:text-lg leading-relaxed ${
                 theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
               }`}>
-                Founded in 2023, <span className="font-semibold">Data Med for Project Management Services Co</span> is a trusted partner for healthcare providers seeking accuracy, efficiency, and compliance in their financial operations. We specialize in <span className="font-semibold">Revenue Cycle Management (RCM), E-Claim Reconciliation, and Resubmission services</span>, ensuring that hospitals, clinics, and medical centers maximize their reimbursements while minimizing administrative burden.
+                <span className="font-semibold">Data Med Project Management Services Co. (DataMed)</span> is a trusted ally for healthcare providers across the Middle East, specializing in delivering precision, efficiency, and compliance in financial operations. We empower healthcare organizations to prioritize provider care by managing the complexities of claims submission/resubmission processing, reconciliation, and regulatory compliance.
               </p>
               <p className={`text-base sm:text-lg leading-relaxed mt-4 ${
                 theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
               }`}>
-                With a commitment to excellence, we combine advanced technology, deep industry expertise, and a client-focused approach to deliver seamless financial workflows. Our goal is to empower healthcare organizations to focus on patient care, while we handle the complexities of claims management, reconciliation, and compliance.
+                Our end-to-end RCM services cover every stage of the revenue cycle, from claim submission to reconciliation and resubmission. Our proprietary ClaimTracker is a web-based platform that delivers unparalleled accuracy, seamless regulatory compliance, and accelerated payouts.
               </p>
             </motion.div>
           </HoverScale>
@@ -586,7 +787,7 @@ function AppContent() {
               <p className={`leading-relaxed text-sm sm:text-base flex-grow ${
                 theme === 'dark' ? 'text-gray-200' : 'text-gray-700'
               }`}>
-                Our mission is to streamline healthcare revenue processes by delivering reliable, accurate, and efficient RCM and e-claim solutions that reduce denials, accelerate payments, and enhance financial performance for healthcare providers.
+                Our mission is to optimize healthcare revenue processes by providing reliable, accurate, and efficient RCM and e-claim solutions that minimize denials, accelerate payments, and enhance financial (AR) performance for healthcare providers.
               </p>
             </motion.div>
           </HoverScale>
@@ -607,7 +808,79 @@ function AppContent() {
               <p className={`leading-relaxed text-sm sm:text-base flex-grow ${
                 theme === 'dark' ? 'text-gray-200' : 'text-gray-700'
               }`}>
-                Our vision is to become a leading RCM solutions provider in the Middle East and beyond, recognized for innovation, trust, and excellence in healthcare financial management — helping healthcare institutions achieve sustainable growth while prioritizing patient well-being.
+                To be the leading RCM solutions provider in the Middle East and beyond, renowned for innovation, trust, and excellence in healthcare financial management, driving sustainable growth for healthcare institutions while prioritizing provider well-being.
+              </p>
+            </motion.div>
+          </HoverScale>
+        </div>
+      </section>
+
+      {/* Why Choose Data Med Section */}
+      <section id="why-choose-us" className={`py-12 sm:py-24 transition-colors duration-300 ${
+        theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100'
+      }`}>
+        <FadeIn direction="up" delay={0.2}>
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+              Why Choose Data Med?
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300">
+              We offer a scalable, secure platform for data transmission and analytics, designed to modernize the healthcare RCM ecosystem.
+            </p>
+          </div>
+        </FadeIn>
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {/* Innovative Technology */}
+          <HoverScale scale={1.02}>
+            <motion.div 
+              whileHover={{ y: -5 }}
+              className={`p-6 rounded-xl transition-all duration-200 hover:shadow-lg h-full flex flex-col ${
+                theme === 'dark' 
+                  ? 'bg-gray-700 hover:bg-gray-600' 
+                  : 'bg-white hover:bg-gray-50'
+              }`}
+            >
+              <FaRocket className="h-8 w-8 text-blue-500 mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Innovative Technology</h3>
+              <p className={`text-sm flex-grow ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+                Our cloud-based platform integrates seamlessly with existing healthcare systems, offering scalability and ease of use.
+              </p>
+            </motion.div>
+          </HoverScale>
+
+          {/* Industry Expertise */}
+          <HoverScale scale={1.02}>
+            <motion.div 
+              whileHover={{ y: -5 }}
+              className={`p-6 rounded-xl transition-all duration-200 hover:shadow-lg h-full flex flex-col ${
+                theme === 'dark' 
+                  ? 'bg-gray-700 hover:bg-gray-600' 
+                  : 'bg-white hover:bg-gray-50'
+              }`}
+            >
+              <FaStethoscope className="h-8 w-8 text-green-500 mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Industry Expertise</h3>
+              <p className={`text-sm flex-grow ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+                We have deep knowledge of the healthcare sector, allowing us to tailor solutions to the unique needs of hospitals, clinics, and medical research facilities.
+              </p>
+            </motion.div>
+          </HoverScale>
+
+          {/* Client-Centric Approach */}
+          <HoverScale scale={1.02}>
+            <motion.div 
+              whileHover={{ y: -5 }}
+              className={`p-6 rounded-xl transition-all duration-200 hover:shadow-lg h-full flex flex-col ${
+                theme === 'dark' 
+                  ? 'bg-gray-700 hover:bg-gray-600' 
+                  : 'bg-white hover:bg-gray-50'
+              }`}
+            >
+              <FaHandshake className="h-8 w-8 text-purple-500 mb-4" />
+              <h3 className="text-lg font-semibold mb-2">Client-Centric Approach</h3>
+              <p className={`text-sm flex-grow ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+                We partner closely with clients to deliver customized solutions that drive efficiency and financial success.
               </p>
             </motion.div>
           </HoverScale>
@@ -653,13 +926,51 @@ function AppContent() {
       <section id="contact" className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-24">
         <FadeIn direction="up" delay={0.2}>
           <h2 className="text-2xl sm:text-3xl font-semibold mb-4 sm:mb-6 text-center">Contact Us</h2>
+          <p className="text-center text-lg text-gray-600 dark:text-gray-300 mb-8">
+            Ready to revolutionize your RCM process? Contact us today for a free demo.
+          </p>
         </FadeIn>
-        <FadeIn direction="up" delay={0.4}>
-          <div className="text-center text-sm sm:text-base space-y-2">
-            <p>Email: ahila@datamed-uae.com | Phone: 505766911</p>
-            <p>Address: #619/0, Abraj Center, Naif Deira, Dubai, United Arab Emirates</p>
-          </div>
-        </FadeIn>
+        
+        <div className="grid md:grid-cols-2 gap-8 sm:gap-12">
+          {/* Contact Information */}
+          <FadeIn direction="left" delay={0.4}>
+            <div className={`p-6 rounded-xl ${
+              theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+            }`}>
+              <h3 className="text-xl font-semibold mb-6">Get in Touch</h3>
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3">
+                  <FaEnvelope className="h-5 w-5 text-blue-500" />
+                  <span className="text-sm sm:text-base">ahila@datamed-uae.com</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <FaMapMarkerAlt className="h-5 w-5 text-green-500" />
+                  <span className="text-sm sm:text-base">#619/0, Abraj Center, Naif Deira, Dubai, United Arab Emirates</span>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
+
+          {/* Call to Action */}
+          <FadeIn direction="right" delay={0.6}>
+            <div className={`p-6 rounded-xl text-center ${
+              theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+            }`}>
+              <h3 className="text-xl font-semibold mb-4">Ready to Get Started?</h3>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Experience the power of our Claims Tracker™ platform with a personalized demo.
+              </p>
+              <HoverScale scale={1.05}>
+                <button
+                  className="px-6 py-3 rounded-md font-semibold transition-all duration-200 shadow-lg hover:shadow-xl text-white"
+                  style={{ backgroundColor: "#178560", cursor: "pointer" }}
+                >
+                  Request Free Demo
+                </button>
+              </HoverScale>
+            </div>
+          </FadeIn>
+        </div>
       </section>
 
       {/* Footer */}
@@ -668,11 +979,30 @@ function AppContent() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className={`py-4 sm:py-6 text-center text-sm sm:text-base transition-colors duration-300 ${
+        className={`py-8 sm:py-12 text-center transition-colors duration-300 ${
           theme === 'dark' ? 'bg-gray-900 text-gray-300' : 'bg-gray-800 text-white'
         }`}
       >
-        © 2024 DataMed. All rights reserved.
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="mb-6">
+            <img src={Logo} alt="Data Med Logo" className="h-16 w-16 mx-auto mb-4" />
+            <h3 className="text-xl font-bold mb-2">Data Med Project Management Services Co.</h3>
+            <p className="text-sm sm:text-base text-gray-400 mb-4">
+              Smart Insurance Claims. Faster Payouts
+            </p>
+            <p className="text-sm text-gray-500">
+              Pioneering Intelligent and Ethical Transformation by Redefining Possibilities with Data & AI
+            </p>
+          </div>
+          <div className="border-t border-gray-700 pt-6">
+            <p className="text-sm sm:text-base">
+              © 2024 Data Med Project Management Services Co. All rights reserved.
+            </p>
+            <p className="text-xs text-gray-500 mt-2">
+              #619/0, Abraj Center, Naif Deira, Dubai, United Arab Emirates
+            </p>
+          </div>
+        </div>
       </motion.footer>
     </div>
   );
