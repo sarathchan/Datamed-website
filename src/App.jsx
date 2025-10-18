@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import toast, { Toaster } from 'react-hot-toast';
 import { 
   AiFillCheckCircle, 
   AiFillPlusCircle, 
@@ -94,6 +95,15 @@ const ThemeProvider = ({ children }) => {
 function AppContent() {
   const [activeLink, setActiveLink] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    fullName: '',
+    contactNumber: '',
+    email: '',
+    facilityName: '',
+    preferredTime: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
   const navLinks = [
@@ -111,6 +121,101 @@ function AppContent() {
     if (el) {
       el.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      // Format email content
+      const emailContent = `Dear Data Med Team,
+
+I would like to request a free demo of your Claims Tracker platform.
+
+Here are my details:
+
+• Full Name: ${formData.fullName}
+• Contact Number: ${formData.contactNumber}
+• Email: ${formData.email}
+• Facility Name: ${formData.facilityName}
+• Preferred Demo Time: ${formData.preferredTime}
+
+I am interested in learning more about your RCM solutions and how they can help streamline our healthcare operations.
+
+Please let me know the next steps for scheduling the demo.
+
+Best regards,
+${formData.fullName}
+
+---
+Submitted on: ${new Date().toLocaleString()}`;
+      
+      // Create mailto link
+      const subject = encodeURIComponent('Demo Request - Data Med Claims Tracker');
+      const body = encodeURIComponent(emailContent);
+      const mailtoLink = `mailto:ahila@datamed-uae.com?subject=${subject}&body=${body}`;
+      
+      // Reset form
+      setFormData({
+        fullName: '',
+        contactNumber: '',
+        email: '',
+        facilityName: '',
+        preferredTime: ''
+      });
+      
+      // Close modal
+      setIsModalOpen(false);
+      
+      // Show success toast
+      toast.success('Thank you for your interest! Your email client will open with a pre-filled message. Please send the email to complete your demo request.', {
+        duration: 6000,
+        position: 'top-center',
+        style: {
+          background: '#10B981',
+          color: 'white',
+          fontWeight: '500'
+        }
+      });
+      
+      // Open email client after a short delay
+      setTimeout(() => {
+        window.open(mailtoLink, '_self');
+      }, 1000);
+      
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      
+      // Show error toast
+      toast.error('There was an error preparing your request. Please try again.', {
+        duration: 5000,
+        position: 'top-center',
+        style: {
+          background: '#EF4444',
+          color: 'white',
+          fontWeight: '500'
+        }
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -281,6 +386,7 @@ function AppContent() {
             >
               <HoverScale scale={1.05}>
                 <button
+                  onClick={openModal}
                   className="px-6 py-3 rounded-md font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
                   style={{ backgroundColor: "#dd5d5d", color: "white", cursor:"pointer" }}
                 >
@@ -714,8 +820,8 @@ function AppContent() {
 
 
 
-      {/* Video Section */}
-      <FadeIn direction="up" delay={0.2}>
+      {/* Video Section - Commented Out */}
+      {/* <FadeIn direction="up" delay={0.2}>
         <section className="text-center py-8 sm:py-12 px-4 sm:px-6">
           <HoverScale scale={1.02}>
             <motion.div 
@@ -738,7 +844,7 @@ function AppContent() {
             </motion.div>
           </HoverScale>
         </section>
-      </FadeIn>
+      </FadeIn> */}
 
       {/* About Us Section */}
       <section id="about" className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-24">
@@ -844,7 +950,7 @@ function AppContent() {
               <FaRocket className="h-8 w-8 text-blue-500 mb-4" />
               <h3 className="text-lg font-semibold mb-2">Innovative Technology</h3>
               <p className={`text-sm flex-grow ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
-                Our cloud-based platform integrates seamlessly with existing healthcare systems, offering scalability and ease of use.
+                Our secured platform integrates seamlessly with existing healthcare systems, offering scalability and ease of use.
               </p>
             </motion.div>
           </HoverScale>
@@ -887,8 +993,8 @@ function AppContent() {
         </div>
       </section>
 
-      {/* Features / Screenshots */}
-      <section id="features" className={`max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-24 transition-colors duration-300 ${
+      {/* Features / Screenshots - Commented Out */}
+      {/* <section id="features" className={`max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-24 transition-colors duration-300 ${
         theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100'
       }`}>
         <FadeIn direction="up" delay={0.2}>
@@ -920,7 +1026,7 @@ function AppContent() {
             />
           </HoverScale>
         </div>
-      </section>
+      </section> */}
 
       {/* Contact Section */}
       <section id="contact" className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-24">
@@ -949,7 +1055,7 @@ function AppContent() {
                 </div>
               </div>
             </div>
-          </FadeIn>
+        </FadeIn>
 
           {/* Call to Action */}
           <FadeIn direction="right" delay={0.6}>
@@ -962,6 +1068,7 @@ function AppContent() {
               </p>
               <HoverScale scale={1.05}>
                 <button
+                  onClick={openModal}
                   className="px-6 py-3 rounded-md font-semibold transition-all duration-200 shadow-lg hover:shadow-xl text-white"
                   style={{ backgroundColor: "#178560", cursor: "pointer" }}
                 >
@@ -1004,6 +1111,202 @@ function AppContent() {
           </div>
         </div>
       </motion.footer>
+
+      {/* Toast Container */}
+      <Toaster 
+        position="top-center"
+        reverseOrder={false}
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: '#363636',
+            color: '#fff',
+          },
+          success: {
+            duration: 5000,
+            style: {
+              background: '#10B981',
+            },
+          },
+          error: {
+            duration: 5000,
+            style: {
+              background: '#EF4444',
+            },
+          },
+        }}
+      />
+
+      {/* Demo Request Modal */}
+      {isModalOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={closeModal}
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            className={`w-full max-w-md rounded-lg shadow-xl ${
+              theme === 'dark' ? 'bg-gray-800' : 'bg-white'
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className={`text-xl font-semibold ${
+                  theme === 'dark' ? 'text-white' : 'text-gray-900'
+                }`}>
+                  Request Free Demo
+                </h3>
+                <button
+                  onClick={closeModal}
+                  className={`p-2 rounded-lg transition-colors ${
+                    theme === 'dark' 
+                      ? 'text-gray-400 hover:bg-gray-700' 
+                      : 'text-gray-500 hover:bg-gray-100'
+                  }`}
+                >
+                  <FaTimes className="w-5 h-5" />
+                </button>
+              </div>
+              
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label className={`block text-sm font-medium mb-2 ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                  }`}>
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                      theme === 'dark' 
+                        ? 'bg-gray-700 border-gray-600 text-white' 
+                        : 'bg-white border-gray-300 text-gray-900'
+                    }`}
+                  />
+                </div>
+                
+                <div>
+                  <label className={`block text-sm font-medium mb-2 ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                  }`}>
+                    Contact Number *
+                  </label>
+                  <input
+                    type="tel"
+                    name="contactNumber"
+                    value={formData.contactNumber}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                      theme === 'dark' 
+                        ? 'bg-gray-700 border-gray-600 text-white' 
+                        : 'bg-white border-gray-300 text-gray-900'
+                    }`}
+                  />
+                </div>
+                
+                <div>
+                  <label className={`block text-sm font-medium mb-2 ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                  }`}>
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                      theme === 'dark' 
+                        ? 'bg-gray-700 border-gray-600 text-white' 
+                        : 'bg-white border-gray-300 text-gray-900'
+                    }`}
+                  />
+                </div>
+                
+                <div>
+                  <label className={`block text-sm font-medium mb-2 ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                  }`}>
+                    Facility Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="facilityName"
+                    value={formData.facilityName}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                      theme === 'dark' 
+                        ? 'bg-gray-700 border-gray-600 text-white' 
+                        : 'bg-white border-gray-300 text-gray-900'
+                    }`}
+                  />
+                </div>
+                
+                <div>
+                  <label className={`block text-sm font-medium mb-2 ${
+                    theme === 'dark' ? 'text-gray-300' : 'text-gray-700'
+                  }`}>
+                    Preferred Demo Time *
+                  </label>
+                  <select
+                    name="preferredTime"
+                    value={formData.preferredTime}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                      theme === 'dark' 
+                        ? 'bg-gray-700 border-gray-600 text-white' 
+                        : 'bg-white border-gray-300 text-gray-900'
+                    }`}
+                  >
+                    <option value="">Select preferred time</option>
+                    <option value="Morning (9 AM - 12 PM)">Morning (9 AM - 12 PM)</option>
+                    <option value="Afternoon (12 PM - 5 PM)">Afternoon (12 PM - 5 PM)</option>
+                    <option value="Evening (5 PM - 8 PM)">Evening (5 PM - 8 PM)</option>
+                  </select>
+                </div>
+                
+                <div className="flex space-x-3 pt-4">
+                  <button
+                    type="button"
+                    onClick={closeModal}
+                    className={`flex-1 px-4 py-2 rounded-lg font-medium transition-colors ${
+                      theme === 'dark' 
+                        ? 'bg-gray-700 text-gray-300 hover:bg-gray-600' 
+                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                    }`}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? 'Submitting...' : 'Submit Request'}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
     </div>
   );
 }
